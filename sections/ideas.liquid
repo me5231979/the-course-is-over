@@ -1,0 +1,51 @@
+<section class="ideas" id="{{ section.settings.anchor | default: section.id }}">
+  <div class="wrap">
+    <div class="section-head">
+      {%- if section.settings.label != blank -%}<p class="label label--ember">{{ section.settings.label }}</p>{%- endif -%}
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.intro != blank -%}<div class="section-head__intro">{{ section.settings.intro }}</div>{%- endif -%}
+    </div>
+    <ol class="ideas__grid">
+      {%- for block in section.blocks -%}
+        <li class="card" {{ block.shopify_attributes }}>
+          <span class="card__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <h3 class="h3">{{ block.settings.title }}</h3>
+          <div class="card__body">{{ block.settings.body }}</div>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ideas",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "ideas" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Inside the book" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Learning that happens <em>in the work</em>" },
+    { "type": "richtext", "id": "intro", "label": "Intro" }
+  ],
+  "blocks": [
+    {
+      "type": "idea",
+      "name": "Idea",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Idea" },
+        { "type": "richtext", "id": "body", "label": "Body", "default": "<p>Describe the idea.</p>" }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Ideas",
+      "blocks": [
+        { "type": "idea" },
+        { "type": "idea" },
+        { "type": "idea" }
+      ]
+    }
+  ]
+}
+{% endschema %}

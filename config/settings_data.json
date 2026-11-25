@@ -1,0 +1,12 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "book_title": "The Course Is Over",
+      "book_subtitle": "A Bet on AI, Training, and How People Learn at Work",
+      "book_author": "Matthew Estes",
+      "release_label": "Coming soon",
+      "cart_notes": true
+    }
+  }
+}

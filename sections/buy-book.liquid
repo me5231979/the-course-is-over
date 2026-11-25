@@ -1,0 +1,55 @@
+{%- assign book = section.settings.product | default: settings.featured_book -%}
+<section class="buy-book" id="{{ section.settings.anchor | default: section.id }}">
+  <div class="wrap buy-book__inner">
+    <div class="buy-book__cover">
+      {%- if book != blank and book.featured_image != blank and settings.cover_image == blank -%}
+        {% render 'book-cover', image: book.featured_image %}
+      {%- else -%}
+        {% render 'book-cover' %}
+      {%- endif -%}
+    </div>
+    <div class="buy-book__copy">
+      <p class="label label--ember">{{ section.settings.label }}</p>
+      <h2 class="h2">{{ section.settings.heading }}</h2>
+      {%- if section.settings.body != blank -%}<div class="rte">{{ section.settings.body }}</div>{%- endif -%}
+
+      {%- if book != blank -%}
+        {% render 'buy-form', product: book, section_id: section.id, show_buy_now: section.settings.show_buy_now %}
+        <a class="link" href="{{ book.url }}">{{ 'products.view_details' | t }}</a>
+      {%- else -%}
+        <p class="note">{{ section.settings.empty_text }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.bulk_text != blank -%}
+        <div class="buy-book__bulk rte">{{ section.settings.bulk_text }}</div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Buy the book",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "buy" },
+    { "type": "product", "id": "product", "label": "Book product", "info": "Defaults to the book set in Theme settings." },
+    { "type": "text", "id": "label", "label": "Label", "default": "Get the book" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Pick your <em>format</em>" },
+    { "type": "richtext", "id": "body", "label": "Body" },
+    { "type": "checkbox", "id": "show_buy_now", "label": "Show dynamic checkout button", "default": true },
+    {
+      "type": "text",
+      "id": "empty_text",
+      "label": "Text before a product is set",
+      "default": "Formats and pricing are on the way. Sign up below to hear first."
+    },
+    {
+      "type": "richtext",
+      "id": "bulk_text",
+      "label": "Team orders note",
+      "default": "<p>Buying for a team? <a href=\"/pages/contact\">Ask about bulk orders</a>.</p>"
+    }
+  ],
+  "presets": [{ "name": "Buy the book" }]
+}
+{% endschema %}

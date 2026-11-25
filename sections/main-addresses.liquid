@@ -1,0 +1,45 @@
+<section class="page">
+  <div class="wrap wrap--narrow">
+    <a class="link" href="{{ routes.account_url }}">&larr; {{ 'customer.account.title' | t }}</a>
+    <h1 class="h1">{{ 'customer.addresses' | t }}</h1>
+    {%- paginate customer.addresses by 10 -%}
+      {%- for address in customer.addresses -%}
+        <div class="address">
+          <div class="note">{{ address | format_address }}</div>
+          {%- if address == customer.default_address -%}<p class="label label--ember">{{ 'customer.default' | t }}</p>{%- endif -%}
+          {%- form 'customer_address', address -%}
+            <input type="hidden" name="_method" value="delete">
+            <button class="link" type="submit">{{ 'cart.remove' | t }}</button>
+          {%- endform -%}
+        </div>
+      {%- endfor -%}
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+
+    <h2 class="h3">{{ 'customer.add_address' | t }}</h2>
+    {%- form 'customer_address', customer.new_address, class: 'form' -%}
+      {%- if form.errors -%}<div class="signup__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <label class="label" for="AddrFirst">{{ 'customer.first_name' | t }}</label>
+      <input id="AddrFirst" type="text" name="address[first_name]" autocomplete="given-name">
+      <label class="label" for="AddrLast">{{ 'customer.last_name' | t }}</label>
+      <input id="AddrLast" type="text" name="address[last_name]" autocomplete="family-name">
+      <label class="label" for="Addr1">{{ 'customer.address1' | t }}</label>
+      <input id="Addr1" type="text" name="address[address1]" autocomplete="address-line1">
+      <label class="label" for="Addr2">{{ 'customer.address2' | t }}</label>
+      <input id="Addr2" type="text" name="address[address2]" autocomplete="address-line2">
+      <label class="label" for="AddrCity">{{ 'customer.city' | t }}</label>
+      <input id="AddrCity" type="text" name="address[city]" autocomplete="address-level2">
+      <label class="label" for="AddrCountry">{{ 'customer.country' | t }}</label>
+      <select id="AddrCountry" name="address[country]">{{ all_country_option_tags }}</select>
+      <label class="label" for="AddrProvince">{{ 'customer.province' | t }}</label>
+      <input id="AddrProvince" type="text" name="address[province]" autocomplete="address-level1">
+      <label class="label" for="AddrZip">{{ 'customer.zip' | t }}</label>
+      <input id="AddrZip" type="text" name="address[zip]" autocomplete="postal-code">
+      <label class="check"><input type="checkbox" name="address[default]" value="1"> {{ 'customer.set_default' | t }}</label>
+      <button class="btn btn--ember" type="submit">{{ 'customer.submit' | t }}</button>
+    {%- endform -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Addresses" }
+{% endschema %}

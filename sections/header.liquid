@@ -1,0 +1,44 @@
+<header class="header" data-header>
+  <div class="wrap header__inner">
+    <a href="{{ routes.root_url }}" class="header__brand">
+      <span class="header__mark" aria-hidden="true"></span>
+      {{ section.settings.brand_text | default: settings.book_title }}
+    </a>
+
+    <nav class="header__nav" aria-label="Primary">
+      <button class="header__toggle" type="button" aria-expanded="false" aria-controls="HeaderMenu" data-menu-toggle>
+        <span class="visually-hidden">Menu</span>
+        <span class="header__burger" aria-hidden="true"></span>
+      </button>
+      <ul id="HeaderMenu" class="header__menu" data-menu>
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      {%- if shop.customer_accounts_enabled and section.settings.show_account -%}
+        <a class="header__link" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}">
+          {%- if customer -%}{{ 'customer.account.title' | t }}{%- else -%}{{ 'customer.log_in' | t }}{%- endif -%}
+        </a>
+      {%- endif -%}
+      <a class="header__cart" href="{{ routes.cart_url }}">
+        {{ 'cart.title' | t }}
+        <span class="header__count" data-cart-count{% if cart.item_count == 0 %} hidden{% endif %}>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "section-header",
+  "settings": [
+    { "type": "text", "id": "brand_text", "label": "Brand text", "info": "Defaults to the book title." },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "show_account", "label": "Show account link", "default": false }
+  ]
+}
+{% endschema %}

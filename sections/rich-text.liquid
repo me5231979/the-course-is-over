@@ -1,0 +1,27 @@
+<section class="richtext richtext--{{ section.settings.tone }}" id="section-{{ section.id }}">
+  <div class="wrap wrap--narrow">
+    {%- if section.settings.heading != blank -%}<h2 class="h2">{{ section.settings.heading }}</h2>{%- endif -%}
+    <div class="rte">{{ section.settings.text }}</div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Rich text",
+  "settings": [
+    { "type": "inline_richtext", "id": "heading", "label": "Heading" },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Write something.</p>" },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        { "value": "dark", "label": "Ink" },
+        { "value": "light", "label": "Bone" }
+      ],
+      "default": "dark"
+    }
+  ],
+  "presets": [{ "name": "Rich text" }]
+}
+{% endschema %}

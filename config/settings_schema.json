@@ -1,0 +1,93 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "The Course Is Over",
+    "theme_version": "1.0.0",
+    "theme_author": "Matthew Estes",
+    "theme_documentation_url": "https://github.com/me5231979/the-course-is-over",
+    "theme_support_url": "https://github.com/me5231979/the-course-is-over"
+  },
+  {
+    "name": "Book",
+    "settings": [
+      {
+        "type": "product",
+        "id": "featured_book",
+        "label": "Book product",
+        "info": "The product the home page sells. Use one product with a Format option (Paperback, Hardcover, eBook, Audiobook)."
+      },
+      {
+        "type": "image_picker",
+        "id": "cover_image",
+        "label": "Cover image",
+        "info": "Used site-wide. Leave empty to show the typographic cover."
+      },
+      {
+        "type": "text",
+        "id": "book_title",
+        "label": "Title",
+        "default": "The Course Is Over"
+      },
+      {
+        "type": "text",
+        "id": "book_subtitle",
+        "label": "Subtitle",
+        "default": "A Bet on AI, Training, and How People Learn at Work"
+      },
+      {
+        "type": "text",
+        "id": "book_author",
+        "label": "Author",
+        "default": "Matthew Estes"
+      },
+      {
+        "type": "text",
+        "id": "release_label",
+        "label": "Release status",
+        "default": "Coming soon",
+        "info": "Shown on the cover badge and buttons when the book isn't on sale yet."
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "color_ink", "label": "Ink (background)", "default": "#0E0E0C" },
+      { "type": "color", "id": "color_char", "label": "Char (cards)", "default": "#1C1B19" },
+      { "type": "color", "id": "color_bone", "label": "Bone (text, light sections)", "default": "#F5F2EC" },
+      { "type": "color", "id": "color_smoke", "label": "Smoke (rules on light)", "default": "#E6E1D8" },
+      { "type": "color", "id": "color_ember", "label": "Ember (accent on dark)", "default": "#FF5A1F" },
+      { "type": "color", "id": "color_ember_deep", "label": "Ember Deep (accent on light)", "default": "#B8360A" },
+      { "type": "color", "id": "color_flare", "label": "Flare (glow only)", "default": "#FFB547" },
+      { "type": "color", "id": "color_ash", "label": "Ash (secondary on dark)", "default": "#8A857C" },
+      { "type": "color", "id": "color_slate", "label": "Slate (secondary on light)", "default": "#5E5A53" }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      { "type": "url", "id": "social_linkedin", "label": "LinkedIn" },
+      { "type": "url", "id": "social_instagram", "label": "Instagram" },
+      { "type": "url", "id": "social_youtube", "label": "YouTube" },
+      { "type": "url", "id": "social_podcast", "label": "Podcast" }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      { "type": "image_picker", "id": "favicon", "label": "Favicon", "info": "32 x 32px PNG" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "cart_notes",
+        "label": "Allow order notes",
+        "default": true,
+        "info": "Useful for signed-copy requests."
+      }
+    ]
+  }
+]

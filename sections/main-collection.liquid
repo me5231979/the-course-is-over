@@ -1,0 +1,14 @@
+{%- paginate collection.products by 12 -%}
+<section class="page">
+  <div class="wrap">
+    <h1 class="h1">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}<div class="rte">{{ collection.description }}</div>{%- endif -%}
+    {% render 'product-grid', products: collection.products %}
+    {% render 'pagination', paginate: paginate %}
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Collection" }
+{% endschema %}

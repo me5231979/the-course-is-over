@@ -1,0 +1,27 @@
+<section class="page">
+  <div class="wrap wrap--narrow">
+    <a class="link" href="{{ routes.account_url }}">&larr; {{ 'customer.account.title' | t }}</a>
+    <h1 class="h1">{{ order.name }}</h1>
+    <p class="note">{{ order.created_at | date: format: 'date' }} &middot; {{ order.financial_status_label }} &middot; {{ order.fulfillment_status_label }}</p>
+    <ul class="cart__items">
+      {%- for line_item in order.line_items -%}
+        <li class="cart__item">
+          <div class="cart__meta">
+            <span class="cart__name">{{ line_item.title }}</span>
+            <p class="cart__variant">&times; {{ line_item.quantity }}</p>
+            {%- if line_item.fulfillment -%}<p class="note">{{ line_item.fulfillment.tracking_company }} {{ line_item.fulfillment.tracking_number }}</p>{%- endif -%}
+          </div>
+          <p class="cart__line-price">{{ line_item.final_line_price | money }}</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+    <p class="cart__total"><span>{{ 'cart.subtotal' | t }}</span> <strong>{{ order.total_price | money_with_currency }}</strong></p>
+    {%- if order.shipping_address -%}
+      <h2 class="h3">{{ 'customer.shipping' | t }}</h2>
+      <div class="note">{{ order.shipping_address | format_address }}</div>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Order" }
+{% endschema %}

@@ -1,0 +1,27 @@
+<section class="quote" id="section-{{ section.id }}">
+  <div class="wrap quote__inner">
+    <span class="strike" aria-hidden="true"></span>
+    <blockquote>
+      <p class="quote__text">{{ section.settings.quote }}</p>
+      {%- if section.settings.cite != blank -%}
+        <footer class="quote__cite">{{ section.settings.cite }}</footer>
+      {%- endif -%}
+    </blockquote>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pull quote",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "quote",
+      "label": "Quote",
+      "default": "You are riding the bike, not learning about bike riding. <em>The training wheels come off as you get better.</em>"
+    },
+    { "type": "text", "id": "cite", "label": "Attribution", "default": "From The Course Is Over" }
+  ],
+  "presets": [{ "name": "Pull quote" }]
+}
+{% endschema %}

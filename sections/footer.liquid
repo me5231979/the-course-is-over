@@ -1,0 +1,45 @@
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <p class="footer__title">{{ settings.book_title }}</p>
+      <p class="footer__sub">{{ settings.book_subtitle }}</p>
+    </div>
+
+    {%- if section.settings.menu != blank -%}
+      <ul class="footer__menu">
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    <ul class="footer__social">
+      {%- if settings.social_linkedin != blank -%}<li><a href="{{ settings.social_linkedin }}" rel="noopener" target="_blank">LinkedIn</a></li>{%- endif -%}
+      {%- if settings.social_instagram != blank -%}<li><a href="{{ settings.social_instagram }}" rel="noopener" target="_blank">Instagram</a></li>{%- endif -%}
+      {%- if settings.social_youtube != blank -%}<li><a href="{{ settings.social_youtube }}" rel="noopener" target="_blank">YouTube</a></li>{%- endif -%}
+      {%- if settings.social_podcast != blank -%}<li><a href="{{ settings.social_podcast }}" rel="noopener" target="_blank">Podcast</a></li>{%- endif -%}
+    </ul>
+  </div>
+  <div class="wrap footer__base">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ settings.book_author }}. {{ section.settings.copyright }}</p>
+    {%- if section.settings.show_payment -%}
+      <ul class="footer__pay" aria-label="Payment methods">
+        {%- for type in shop.enabled_payment_types -%}
+          <li>{{ type | payment_type_svg_tag: class: 'footer__pay-icon' }}</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" },
+    { "type": "text", "id": "copyright", "label": "Copyright line", "default": "All rights reserved." },
+    { "type": "checkbox", "id": "show_payment", "label": "Show payment icons", "default": true }
+  ]
+}
+{% endschema %}

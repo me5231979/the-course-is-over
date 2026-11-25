@@ -1,0 +1,30 @@
+<section class="page">
+  <div class="wrap wrap--narrow">
+    <h1 class="h1">{{ 'customer.log_in' | t }}</h1>
+    {%- form 'customer_login', class: 'form' -%}
+      {%- if form.errors -%}<div class="signup__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+      <label class="label" for="LoginEmail">{{ 'contact.email' | t }}</label>
+      <input id="LoginEmail" type="email" name="customer[email]" autocomplete="email" required>
+      {%- if form.password_needed -%}
+        <label class="label" for="LoginPassword">{{ 'customer.password' | t }}</label>
+        <input id="LoginPassword" type="password" name="customer[password]" autocomplete="current-password" required>
+        <a class="link" href="#recover">{{ 'customer.forgot' | t }}</a>
+      {%- endif -%}
+      <button class="btn btn--ember" type="submit">{{ 'customer.log_in' | t }}</button>
+      <a class="link" href="{{ routes.account_register_url }}">{{ 'customer.create' | t }}</a>
+    {%- endform -%}
+
+    <div id="recover" class="form form--recover">
+      <h2 class="h3">{{ 'customer.reset' | t }}</h2>
+      {%- form 'recover_customer_password' -%}
+        {%- if form.posted_successfully? -%}<p class="signup__msg" role="status">{{ 'customer.reset_sent' | t }}</p>{%- endif -%}
+        <label class="label" for="RecoverEmail">{{ 'contact.email' | t }}</label>
+        <input id="RecoverEmail" type="email" name="email" autocomplete="email" required>
+        <button class="btn btn--ghost" type="submit">{{ 'customer.submit' | t }}</button>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Login" }
+{% endschema %}

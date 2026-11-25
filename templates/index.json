@@ -1,0 +1,151 @@
+{
+  "sections": {
+    "hero": {
+      "type": "book-hero",
+      "settings": {
+        "eyebrow": "A new book by Matthew Estes",
+        "lede": "<p>Most workplace training teaches people about the work. This book makes the case for learning inside it, with a coach that supports you where you need it and pulls back as you get better.</p>",
+        "cta_buy": "Get the book",
+        "cta_soon": "Get notified at launch",
+        "cta_secondary": "Read the idea"
+      }
+    },
+    "problem": {
+      "type": "statement",
+      "settings": {
+        "label": "The problem",
+        "text": "We keep building training on how to ride a horse. <em>The work now runs on cars.</em>",
+        "body": "<p>AI is changing how work gets done faster than courses can be written. Seat time and completions don't tell you if someone can do the job. This book is about what comes next.</p>",
+        "tone": "dark"
+      }
+    },
+    "ideas": {
+      "type": "ideas",
+      "settings": {
+        "anchor": "ideas",
+        "label": "Inside the book",
+        "heading": "Learning that happens <em>in the work</em>"
+      },
+      "blocks": {
+        "coach": {
+          "type": "idea",
+          "settings": {
+            "title": "The coach",
+            "body": "<p>Guidance in the flow of real work. You do the task. The coach supports, gives feedback, and helps you reflect on what you did.</p>"
+          }
+        },
+        "throttle": {
+          "type": "idea",
+          "settings": {
+            "title": "The throttle",
+            "body": "<p>Support that fades as you show you can do it. Guide where it's needed. Hand off where it isn't.</p>"
+          }
+        },
+        "mondays": {
+          "type": "idea",
+          "settings": {
+            "title": "Four Mondays",
+            "body": "<p>Four people. Four first days on the job. Stories that show what learning at work could look like next.</p>"
+          }
+        },
+        "ld": {
+          "type": "idea",
+          "settings": {
+            "title": "L&D, changed",
+            "body": "<p>Not gone. Drastically changed. Practice, community, and the human side of learning move to the center.</p>"
+          }
+        }
+      },
+      "block_order": ["coach", "throttle", "mondays", "ld"]
+    },
+    "quote": {
+      "type": "pull-quote",
+      "settings": {
+        "quote": "You are riding the bike, not learning about bike riding. <em>The training wheels come off as you get better.</em>",
+        "cite": "From The Course Is Over"
+      }
+    },
+    "buy": {
+      "type": "buy-book",
+      "settings": {
+        "anchor": "buy",
+        "label": "Get the book",
+        "heading": "Pick your <em>format</em>",
+        "show_buy_now": true,
+        "empty_text": "Formats and pricing are on the way. Sign up below to hear first.",
+        "bulk_text": "<p>Buying for a team? <a href=\"/pages/contact\">Ask about bulk orders</a>.</p>"
+      }
+    },
+    "author": {
+      "type": "author",
+      "settings": {
+        "anchor": "author",
+        "label": "About the author",
+        "bio": "<p>Matthew Estes has spent more than 20 years in organizational learning and leadership development, much of it in healthcare.</p><p>He started in sales after school. Like a lot of people in this field, he never knew L&amp;D was a career until he was in it. Today he builds working learning tools, coaches, and simulations instead of slide decks.</p>",
+        "link_label": "Book a talk"
+      }
+    },
+    "invite": {
+      "type": "invitation",
+      "settings": {
+        "label": "For organizations",
+        "heading": "Let's find out <em>together</em>",
+        "body": "<p>These are concepts based in facts and data. The best way to prove them is in real work. If your organization wants to try the ideas in this book, let's talk.</p>",
+        "button": "Start a conversation",
+        "link": "/pages/contact"
+      }
+    },
+    "faq": {
+      "type": "faq",
+      "settings": {
+        "anchor": "faq",
+        "label": "Questions",
+        "heading": "Before you <em>buy</em>"
+      },
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Who is this book for?",
+            "answer": "<p>L&amp;D teams, managers, and leaders who are watching AI change the work and wondering what that means for how people learn it.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "What formats are available?",
+            "answer": "<p>Formats are listed above as they go on sale. Sign up for the launch list to hear when each one is ready.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "Can I order copies for my team?",
+            "answer": "<p>Yes. <a href=\"/pages/contact\">Get in touch</a> for bulk orders.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "question": "Is Matthew available to speak?",
+            "answer": "<p>Yes, for conferences, leadership teams, and L&amp;D groups. <a href=\"/pages/contact\">Send a note</a>.</p>"
+          }
+        }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    },
+    "signup": {
+      "type": "newsletter",
+      "settings": {
+        "anchor": "notify",
+        "label": "Launch list",
+        "heading": "Be first to <em>read it</em>",
+        "body": "<p>One email when the book is out. A few more when there's something worth reading.</p>",
+        "tag": "launch-list",
+        "button": "Notify me",
+        "success": "You're on the list."
+      }
+    }
+  },
+  "order": ["hero", "problem", "ideas", "quote", "buy", "author", "invite", "faq", "signup"]
+}

@@ -1,0 +1,29 @@
+<section class="invite" id="section-{{ section.id }}">
+  <div class="wrap invite__inner">
+    <p class="label">{{ section.settings.label }}</p>
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+    <div class="invite__body">{{ section.settings.body }}</div>
+    {%- if section.settings.button != blank -%}
+      <a class="btn btn--ember" href="{{ section.settings.link | default: routes.root_url }}">{{ section.settings.button }}</a>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Invitation",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "For organizations" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Let's find out <em>together</em>" },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>These are concepts based in facts and data. The best way to prove them is in real work. If your organization wants to try the ideas in this book, let's talk.</p>"
+    },
+    { "type": "text", "id": "button", "label": "Button", "default": "Start a conversation" },
+    { "type": "url", "id": "link", "label": "Link" }
+  ],
+  "presets": [{ "name": "Invitation" }]
+}
+{% endschema %}

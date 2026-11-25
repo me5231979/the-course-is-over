@@ -1,0 +1,26 @@
+{%- paginate search.results by 12 -%}
+<section class="page">
+  <div class="wrap">
+    <h1 class="h1">{{ 'general.search' | t }}</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="search">
+      <label class="visually-hidden" for="SearchInput">{{ 'general.search' | t }}</label>
+      <input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}">
+      <button class="btn btn--ember" type="submit">{{ 'general.search' | t }}</button>
+    </form>
+    {%- if search.performed -%}
+      <ul class="results">
+        {%- for item in search.results -%}
+          <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+        {%- else -%}
+          <li class="note">{{ 'general.no_results' | t: terms: search.terms }}</li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- endif -%}
+  </div>
+</section>
+{%- endpaginate -%}
+
+{% schema %}
+{ "name": "Search" }
+{% endschema %}

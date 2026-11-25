@@ -1,0 +1,16 @@
+{%- comment -%} Params: product (or variant) {%- endcomment -%}
+{%- liquid
+  if variant
+    assign price = variant.price
+    assign compare = variant.compare_at_price
+  else
+    assign price = product.price
+    assign compare = product.compare_at_price
+  endif
+-%}
+<span class="price">
+  {%- if compare > price -%}
+    <s class="price__compare">{{ compare | money }}</s>
+  {%- endif -%}
+  <span class="price__value">{{ price | money }}</span>
+</span>

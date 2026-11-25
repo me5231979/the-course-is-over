@@ -1,0 +1,57 @@
+{%- comment -%}
+  Format picker + add to cart for the book.
+  Params: product (required), section_id (required), show_buy_now (bool)
+{%- endcomment -%}
+{%- liquid
+  assign current = product.selected_or_first_available_variant
+  assign form_id = 'buy-' | append: section_id
+-%}
+{%- form 'product', product, id: form_id, class: 'buy', data-buy-form: '' -%}
+  <input type="hidden" name="id" value="{{ current.id }}" data-variant-input>
+
+  {%- unless product.has_only_default_variant -%}
+    <fieldset class="formats">
+      <legend class="label">{{ product.options.first | default: 'Format' }}</legend>
+      <div class="formats__grid">
+        {%- for variant in product.variants -%}
+          <label class="format{% unless variant.available %} is-unavailable{% endunless %}">
+            <input
+              type="radio"
+              name="variant-{{ section_id }}"
+              value="{{ variant.id }}"
+              data-price="{{ variant.price | money | escape }}"
+              data-available="{{ variant.available }}"
+              {% if variant.id == current.id %}checked{% endif %}
+            >
+            <span class="format__name">{{ variant.title }}</span>
+            <span class="format__price">
+              {%- if variant.available -%}{{ variant.price | money }}{%- else -%}{{ settings.release_label }}{%- endif -%}
+            </span>
+          </label>
+        {%- endfor -%}
+      </div>
+    </fieldset>
+  {%- endunless -%}
+
+  <div class="buy__row">
+    <button
+      type="submit"
+      name="add"
+      class="btn btn--ember"
+      data-add-button
+      data-label-add="{{ 'products.add_to_cart' | t }}"
+      data-label-soon="{{ settings.release_label | escape }}"
+      {% unless current.available %}disabled{% endunless %}
+    >
+      {%- if current.available -%}
+        {{ 'products.add_to_cart' | t }} &middot; <span data-price-label>{{ current.price | money }}</span>
+      {%- else -%}
+        {{ settings.release_label }}
+      {%- endif -%}
+    </button>
+    {%- if show_buy_now -%}
+      {{ form | payment_button }}
+    {%- endif -%}
+  </div>
+  <p class="buy__status" role="status" aria-live="polite" data-buy-status></p>
+{%- endform -%}

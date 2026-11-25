@@ -1,0 +1,35 @@
+<section class="page">
+  <div class="wrap wrap--narrow">
+    <h1 class="h1">{{ page.title }}</h1>
+    {%- if page.content != blank -%}<div class="rte">{{ page.content }}</div>{%- endif -%}
+
+    {%- form 'contact', class: 'form' -%}
+      {%- if form.posted_successfully? -%}
+        <p class="signup__msg" role="status">{{ 'contact.success' | t }}</p>
+      {%- else -%}
+        {%- if form.errors -%}<div class="signup__error" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+        <label class="label" for="ContactName">{{ 'contact.name' | t }}</label>
+        <input id="ContactName" type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}">
+        <label class="label" for="ContactEmail">{{ 'contact.email' | t }}</label>
+        <input id="ContactEmail" type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}">
+        <label class="label" for="ContactTopic">{{ 'contact.topic' | t }}</label>
+        <select id="ContactTopic" name="contact[topic]">
+          {%- assign topics = section.settings.topics | split: ',' -%}
+          {%- for topic in topics -%}<option>{{ topic | strip }}</option>{%- endfor -%}
+        </select>
+        <label class="label" for="ContactBody">{{ 'contact.message' | t }}</label>
+        <textarea id="ContactBody" name="contact[body]" rows="6" required>{{ form.body }}</textarea>
+        <button class="btn btn--ember" type="submit">{{ 'contact.send' | t }}</button>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact form",
+  "settings": [
+    { "type": "text", "id": "topics", "label": "Topics (comma separated)", "default": "Bulk orders, Speaking, Try the ideas at my organization, Media, Something else" }
+  ]
+}
+{% endschema %}

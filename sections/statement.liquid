@@ -1,0 +1,44 @@
+<section class="statement statement--{{ section.settings.tone }}" id="section-{{ section.id }}">
+  <div class="wrap statement__inner">
+    {%- if section.settings.label != blank -%}
+      <p class="label">{{ section.settings.label }}</p>
+    {%- endif -%}
+    <h2 class="statement__text">{{ section.settings.text }}</h2>
+    {%- if section.settings.body != blank -%}
+      <div class="statement__body">{{ section.settings.body }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Statement",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Label", "default": "The problem" },
+    {
+      "type": "inline_richtext",
+      "id": "text",
+      "label": "Statement",
+      "default": "We keep building training on how to ride a horse. <em>The work now runs on cars.</em>",
+      "info": "Use italics for the serif accent."
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Body",
+      "default": "<p>AI is changing how work gets done faster than courses can be written. Seat time and completions don't tell you if someone can do the job. This book is about what comes next.</p>"
+    },
+    {
+      "type": "select",
+      "id": "tone",
+      "label": "Background",
+      "options": [
+        { "value": "dark", "label": "Ink" },
+        { "value": "light", "label": "Bone" }
+      ],
+      "default": "dark"
+    }
+  ],
+  "presets": [{ "name": "Statement" }]
+}
+{% endschema %}

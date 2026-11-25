@@ -1,0 +1,66 @@
+{%- assign book = section.settings.product | default: settings.featured_book -%}
+<section class="hero" id="section-{{ section.id }}">
+  <div class="hero__glow" aria-hidden="true"></div>
+  <div class="wrap hero__inner">
+    <div class="hero__copy">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="label label--ember">{{ section.settings.eyebrow }}</p>
+      {%- endif -%}
+      <h1 class="hero__title">
+        {%- assign words = settings.book_title | split: ' ' -%}
+        {%- for word in words -%}
+          {%- if forloop.last -%}<em>{{ word }}</em>{%- else -%}{{ word }} {% endif -%}
+        {%- endfor -%}
+      </h1>
+      <p class="hero__subtitle">{{ settings.book_subtitle }}</p>
+      {%- if section.settings.lede != blank -%}
+        <div class="hero__lede">{{ section.settings.lede }}</div>
+      {%- endif -%}
+
+      <div class="hero__ctas">
+        {%- if book != blank and book.available -%}
+          <a class="btn btn--ember" href="{{ book.url }}">{{ section.settings.cta_buy }} &middot; {{ book.price | money }}</a>
+        {%- else -%}
+          <a class="btn btn--ember" href="{{ section.settings.cta_soon_link | default: '#notify' }}">{{ section.settings.cta_soon }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta_secondary != blank -%}
+          <a class="btn btn--ghost" href="{{ section.settings.cta_secondary_link | default: '#ideas' }}">{{ section.settings.cta_secondary }}</a>
+        {%- endif -%}
+      </div>
+      <p class="hero__byline">By {{ settings.book_author }}</p>
+    </div>
+
+    <div class="hero__cover">
+      {%- if book != blank and book.featured_image != blank and settings.cover_image == blank -%}
+        {% render 'book-cover', image: book.featured_image, loading: 'eager' %}
+      {%- else -%}
+        {% render 'book-cover', loading: 'eager' %}
+      {%- endif -%}
+      {%- unless book.available -%}
+        <span class="badge">{{ settings.release_label }}</span>
+      {%- endunless -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Book hero",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Book product", "info": "Defaults to the book set in Theme settings." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "A new book by Matthew Estes" },
+    {
+      "type": "richtext",
+      "id": "lede",
+      "label": "Lede",
+      "default": "<p>Most workplace training teaches people about the work. This book makes the case for learning inside it, with a coach that supports you where you need it and pulls back as you get better.</p>"
+    },
+    { "type": "text", "id": "cta_buy", "label": "Buy button", "default": "Get the book" },
+    { "type": "text", "id": "cta_soon", "label": "Button before launch", "default": "Get notified at launch" },
+    { "type": "url", "id": "cta_soon_link", "label": "Link before launch", "info": "Defaults to the signup section." },
+    { "type": "text", "id": "cta_secondary", "label": "Secondary button", "default": "Read the idea" },
+    { "type": "url", "id": "cta_secondary_link", "label": "Secondary link" }
+  ],
+  "presets": [{ "name": "Book hero" }]
+}
+{% endschema %}

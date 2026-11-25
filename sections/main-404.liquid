@@ -1,0 +1,12 @@
+<section class="page page--center">
+  <div class="wrap wrap--narrow">
+    <p class="label label--ember">404</p>
+    <h1 class="h1">{{ 'general.404_title' | t }}</h1>
+    <p class="note">{{ 'general.404_body' | t }}</p>
+    <a class="btn btn--ember" href="{{ routes.root_url }}">{{ 'general.back_home' | t }}</a>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "404" }
+{% endschema %}

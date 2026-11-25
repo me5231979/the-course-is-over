@@ -1,0 +1,64 @@
+<section class="product" id="section-{{ section.id }}">
+  <div class="wrap product__inner">
+    <div class="product__media">
+      {%- if product.featured_media != blank -%}
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' -%}
+            <div class="product__image{% if forloop.first %} is-featured{% endif %}">
+              {{ media | image_url: width: 1200 | image_tag: loading: 'lazy', widths: '400, 600, 900, 1200', sizes: '(min-width: 990px) 50vw, 100vw', alt: media.alt | default: product.title }}
+            </div>
+          {%- else -%}
+            <div class="product__image">{{ media | media_tag }}</div>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {% render 'book-cover', loading: 'eager' %}
+      {%- endif -%}
+    </div>
+
+    <div class="product__info">
+      <p class="label label--ember">{{ settings.book_author }}</p>
+      <h1 class="product__title">{{ product.title }}</h1>
+      {%- if product.handle == settings.featured_book.handle -%}
+        <p class="hero__subtitle">{{ settings.book_subtitle }}</p>
+      {%- endif -%}
+      <p class="product__price">{% render 'price', product: product %}</p>
+
+      {% render 'buy-form', product: product, section_id: section.id, show_buy_now: section.settings.show_buy_now %}
+
+      <div class="product__desc rte">{{ product.description }}</div>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Book",
+    "name": {{ product.title | json }},
+    "author": { "@type": "Person", "name": {{ settings.book_author | json }} },
+    "description": {{ product.description | strip_html | truncate: 300 | json }},
+    {%- if product.featured_image -%}"image": {{ product.featured_image | image_url: width: 1200 | prepend: 'https:' | json }},{%- endif -%}
+    "url": {{ request.origin | append: product.url | json }},
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type": "Offer",
+          "name": {{ variant.title | json }},
+          "price": {{ variant.price | divided_by: 100.0 | json }},
+          "priceCurrency": {{ cart.currency.iso_code | json }},
+          "availability": "https://schema.org/{% if variant.available %}InStock{% else %}PreOrder{% endif %}"
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ]
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    { "type": "checkbox", "id": "show_buy_now", "label": "Show dynamic checkout button", "default": true }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,37 @@
+<section class="signup" id="{{ section.settings.anchor | default: section.id }}">
+  <div class="wrap signup__inner">
+    <p class="label label--ember">{{ section.settings.label }}</p>
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+    {%- if section.settings.body != blank -%}<div class="signup__body">{{ section.settings.body }}</div>{%- endif -%}
+
+    {%- form 'customer', class: 'signup__form', id: 'signup-form' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter,{{ section.settings.tag }}">
+      {%- if form.posted_successfully? -%}
+        <p class="signup__msg" role="status">{{ section.settings.success }}</p>
+      {%- else -%}
+        <label class="visually-hidden" for="signup-email">Email</label>
+        <input id="signup-email" type="email" name="contact[email]" placeholder="you@work.com" autocomplete="email" required>
+        <button class="btn btn--ember" type="submit">{{ section.settings.button }}</button>
+        {%- if form.errors -%}
+          <p class="signup__error" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Email signup",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "notify" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Launch list" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Be first to <em>read it</em>" },
+    { "type": "richtext", "id": "body", "label": "Body", "default": "<p>One email when the book is out. A few more when there's something worth reading.</p>" },
+    { "type": "text", "id": "tag", "label": "Customer tag", "default": "launch-list" },
+    { "type": "text", "id": "button", "label": "Button", "default": "Notify me" },
+    { "type": "text", "id": "success", "label": "Success message", "default": "You're on the list." }
+  ],
+  "presets": [{ "name": "Email signup" }]
+}
+{% endschema %}

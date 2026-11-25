@@ -1,0 +1,20 @@
+<section class="page">
+  <div class="wrap">
+    <h1 class="h1">{{ 'customer.account.title' | t }}</h1>
+    <p class="note">{{ customer.name }} &middot; <a class="link" href="{{ routes.account_logout_url }}">{{ 'customer.log_out' | t }}</a> &middot; <a class="link" href="{{ routes.account_addresses_url }}">{{ 'customer.addresses' | t }}</a></p>
+    <h2 class="h3">{{ 'customer.orders' | t }}</h2>
+    {%- paginate customer.orders by 20 -%}
+      <ul class="results">
+        {%- for order in customer.orders -%}
+          <li><a href="{{ order.customer_url }}">{{ order.name }}</a> &middot; {{ order.created_at | date: format: 'date' }} &middot; {{ order.financial_status_label }} &middot; {{ order.total_price | money }}</li>
+        {%- else -%}
+          <li class="note">{{ 'customer.no_orders' | t }}</li>
+        {%- endfor -%}
+      </ul>
+      {% render 'pagination', paginate: paginate %}
+    {%- endpaginate -%}
+  </div>
+</section>
+{% schema %}
+{ "name": "Account" }
+{% endschema %}
