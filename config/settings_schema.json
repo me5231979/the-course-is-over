@@ -52,15 +52,15 @@
   {
     "name": "Colors",
     "settings": [
-      { "type": "color", "id": "color_ink", "label": "Ink (background)", "default": "#0E0E0C" },
-      { "type": "color", "id": "color_char", "label": "Char (cards)", "default": "#1C1B19" },
-      { "type": "color", "id": "color_bone", "label": "Bone (text, light sections)", "default": "#F5F2EC" },
-      { "type": "color", "id": "color_smoke", "label": "Smoke (rules on light)", "default": "#E6E1D8" },
-      { "type": "color", "id": "color_ember", "label": "Ember (accent on dark)", "default": "#FF5A1F" },
-      { "type": "color", "id": "color_ember_deep", "label": "Ember Deep (accent on light)", "default": "#B8360A" },
-      { "type": "color", "id": "color_flare", "label": "Flare (glow only)", "default": "#FFB547" },
-      { "type": "color", "id": "color_ash", "label": "Ash (secondary on dark)", "default": "#8A857C" },
-      { "type": "color", "id": "color_slate", "label": "Slate (secondary on light)", "default": "#5E5A53" }
+      { "type": "paragraph", "content": "Taken from the book cover: cream paper, near-black ink and one orange." },
+      { "type": "color", "id": "color_background", "label": "Cream (page background)", "default": "#F5EEE6" },
+      { "type": "color", "id": "color_paper", "label": "Paper (alternate sections)", "default": "#EFE6DB" },
+      { "type": "color", "id": "color_card", "label": "Card", "default": "#FBF7F2" },
+      { "type": "color", "id": "color_text", "label": "Ink (text)", "default": "#1C1B19" },
+      { "type": "color", "id": "color_muted", "label": "Stone (secondary text)", "default": "#4A4741" },
+      { "type": "color", "id": "color_accent", "label": "Orange (buttons, large type)", "default": "#FF5A1F" },
+      { "type": "color", "id": "color_accent_text", "label": "Rust (small orange text on cream)", "default": "#B8360A" },
+      { "type": "color", "id": "color_dark", "label": "Dark sections", "default": "#1C1B19" }
     ]
   },
   {

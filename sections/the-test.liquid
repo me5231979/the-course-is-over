@@ -1,0 +1,66 @@
+<section class="test" id="{{ section.settings.anchor | default: section.id }}">
+  <div class="wrap">
+    {%- if section.settings.label != blank -%}<p class="label label--ember">{{ section.settings.label }}</p>{%- endif -%}
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+    {%- if section.settings.intro != blank -%}<p class="test__intro">{{ section.settings.intro }}</p>{%- endif -%}
+    <ol class="test__groups">
+      {%- for block in section.blocks -%}
+        <li class="group{% if block.settings.highlight %} group--bet{% endif %}" {{ block.shopify_attributes }}>
+          <span class="group__tag">{{ block.settings.tag }}</span>
+          <h3 class="group__title">{{ block.settings.title }}</h3>
+        </li>
+      {%- endfor -%}
+    </ol>
+    <div class="verdict">
+      <div class="verdict__then">
+        <span class="verdict__label">{{ section.settings.then_label }}</span>
+        <p>{{ section.settings.then_text }}</p>
+      </div>
+      <div class="verdict__lose">
+        <span class="verdict__label">{{ section.settings.lose_label }}</span>
+        <p>{{ section.settings.lose_text }}</p>
+      </div>
+    </div>
+    {%- if section.settings.footnote != blank -%}<p class="test__note">{{ section.settings.footnote }}</p>{%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "The test",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "test" },
+    { "type": "text", "id": "label", "label": "Label", "default": "How we'll know" },
+    { "type": "inline_richtext", "id": "heading", "label": "Heading", "default": "Four groups. Same task. <em>Then switch the AI off.</em>" },
+    { "type": "text", "id": "intro", "label": "Intro", "default": "The book borrows a tool from marketing, the A/B test, and names the result that would prove it wrong." },
+    { "type": "text", "id": "then_label", "label": "Then label", "default": "Then" },
+    { "type": "text", "id": "then_text", "label": "Then text", "default": "Everyone does the work with the AI switched off. A month later they do it again, still off." },
+    { "type": "text", "id": "lose_label", "label": "Lose label", "default": "I lose if…" },
+    { "type": "text", "id": "lose_text", "label": "Lose text", "default": "the people who took no course can't do the job without the AI, or can do it on day one but not a month later." },
+    { "type": "inline_richtext", "id": "footnote", "label": "Footnote", "default": "Appendix A, <em>The Kit</em>, includes a two-group version any learning team can run." }
+  ],
+  "blocks": [
+    {
+      "type": "group",
+      "name": "Group",
+      "settings": [
+        { "type": "text", "id": "tag", "label": "Tag", "default": "Group A" },
+        { "type": "text", "id": "title", "label": "Title", "default": "A well-built eLearning course" },
+        { "type": "checkbox", "id": "highlight", "label": "Highlight as the bet", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "The test",
+      "blocks": [
+        { "type": "group", "settings": { "tag": "Group A", "title": "A well-built eLearning course" } },
+        { "type": "group", "settings": { "tag": "Group B", "title": "A well-run class" } },
+        { "type": "group", "settings": { "tag": "Group C", "title": "No course. The work plus an AI that answers questions" } },
+        { "type": "group", "settings": { "tag": "Group D · the bet", "title": "No course. The work plus an AI coach that teaches and backs off", "highlight": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

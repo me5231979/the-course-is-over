@@ -1,28 +1,20 @@
 {%- comment -%}
   Renders the book cover.
-  Order: explicit image param, theme cover image, typographic fallback.
+  Order: explicit image param, theme cover image, then the cover shipped with
+  the theme (assets/book-cover.jpg).
   Params: image (optional), width (optional, default 720), loading (optional)
 {%- endcomment -%}
 {%- liquid
   assign cover = image | default: settings.cover_image
   assign w = width | default: 720
   assign load = loading | default: 'lazy'
+  assign alt_text = settings.book_title | append: ' by ' | append: settings.book_author | append: ', book cover'
 -%}
-<div class="book" aria-label="{{ settings.book_title | escape }} by {{ settings.book_author | escape }}">
+<div class="book">
   <div class="book__spine" aria-hidden="true"></div>
   {%- if cover != blank -%}
-    {{ cover | image_url: width: w | image_tag: class: 'book__img', loading: load, sizes: '(min-width: 990px) 420px, 70vw', widths: '360, 540, 720, 1080', alt: settings.book_title }}
+    {{ cover | image_url: width: w | image_tag: class: 'book__img', loading: load, sizes: '(min-width: 990px) 420px, 70vw', widths: '360, 540, 720, 1080', alt: alt_text }}
   {%- else -%}
-    <div class="book__face">
-      <span class="book__strike" aria-hidden="true"></span>
-      <p class="book__title">
-        {%- assign words = settings.book_title | split: ' ' -%}
-        {%- for word in words -%}
-          {%- if forloop.last -%}<em>{{ word }}</em>{%- else -%}{{ word }} {% endif -%}
-        {%- endfor -%}
-      </p>
-      <p class="book__subtitle">{{ settings.book_subtitle }}</p>
-      <p class="book__author">{{ settings.book_author }}</p>
-    </div>
+    <img class="book__img" src="{{ 'book-cover.jpg' | asset_url }}" width="1200" height="1600" loading="{{ load }}" alt="{{ alt_text | escape }}: two orange training wheels, detached, beside a wrench and bolts">
   {%- endif -%}
 </div>

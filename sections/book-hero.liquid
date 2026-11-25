@@ -1,17 +1,11 @@
 {%- assign book = section.settings.product | default: settings.featured_book -%}
 <section class="hero" id="section-{{ section.id }}">
-  <div class="hero__glow" aria-hidden="true"></div>
   <div class="wrap hero__inner">
     <div class="hero__copy">
       {%- if section.settings.eyebrow != blank -%}
         <p class="label label--ember">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
-      <h1 class="hero__title">
-        {%- assign words = settings.book_title | split: ' ' -%}
-        {%- for word in words -%}
-          {%- if forloop.last -%}<em>{{ word }}</em>{%- else -%}{{ word }} {% endif -%}
-        {%- endfor -%}
-      </h1>
+      <h1 class="hero__title" aria-label="{{ settings.book_title | escape }}">{% render 'book-title' %}</h1>
       <p class="hero__subtitle">{{ settings.book_subtitle }}</p>
       {%- if section.settings.lede != blank -%}
         <div class="hero__lede">{{ section.settings.lede }}</div>

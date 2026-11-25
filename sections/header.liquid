@@ -1,8 +1,12 @@
 <header class="header" data-header>
   <div class="wrap header__inner">
     <a href="{{ routes.root_url }}" class="header__brand">
-      <span class="header__mark" aria-hidden="true"></span>
-      {{ section.settings.brand_text | default: settings.book_title }}
+      {%- if section.settings.brand_text != blank -%}
+        {{ section.settings.brand_text }}
+      {%- else -%}
+        <span class="visually-hidden">{{ settings.book_title }}</span>
+        <span aria-hidden="true">{% render 'book-title', variant: 'inline' %}</span>
+      {%- endif -%}
     </a>
 
     <nav class="header__nav" aria-label="Primary">
@@ -36,7 +40,7 @@
   "name": "Header",
   "class": "section-header",
   "settings": [
-    { "type": "text", "id": "brand_text", "label": "Brand text", "info": "Defaults to the book title." },
+    { "type": "text", "id": "brand_text", "label": "Brand text", "info": "Leave empty to show the cover wordmark." },
     { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
     { "type": "checkbox", "id": "show_account", "label": "Show account link", "default": false }
   ]

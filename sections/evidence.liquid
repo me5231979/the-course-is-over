@@ -1,0 +1,60 @@
+<section class="evidence" id="{{ section.settings.anchor | default: section.id }}">
+  <div class="wrap">
+    {%- if section.settings.label != blank -%}<p class="label label--ember">{{ section.settings.label }}</p>{%- endif -%}
+    <h2 class="h2">{{ section.settings.heading }}</h2>
+    <div class="evidence__stats">
+      {%- for block in section.blocks -%}
+        <figure class="stat{% if block.settings.negative %} stat--neg{% endif %}" {{ block.shopify_attributes }}>
+          <div class="stat__num">{{ block.settings.number }}</div>
+          <figcaption class="stat__text">{{ block.settings.text }}</figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+    {%- if section.settings.closing != blank -%}
+      <p class="evidence__close">{{ section.settings.closing }}</p>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Evidence",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "evidence" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Both sides of the evidence" },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "The research cuts both ways. <em>Anyone who shows you only one study is selling something.</em>"
+    },
+    {
+      "type": "text",
+      "id": "closing",
+      "label": "Closing line",
+      "default": "The difference is whether the help teaches or only answers. This book is about building the kind that teaches, then gets out of the way."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "15%" },
+        { "type": "inline_richtext", "id": "text", "label": "Text", "default": "<b>more problems resolved an hour</b> by customer service agents given an AI assistant." },
+        { "type": "checkbox", "id": "negative", "label": "Show as the counterpoint", "default": false }
+      ]
+    }
+  ],
+  "max_blocks": 4,
+  "presets": [
+    {
+      "name": "Evidence",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "15%", "text": "<b>more problems resolved an hour</b> by customer service agents given an AI assistant. The newest agents gained the most." } },
+        { "type": "stat", "settings": { "number": "−17%", "text": "<b>lower scores</b> once the AI was taken away, for students who had practiced with an AI that handed them answers, compared with students who never had it.", "negative": true } }
+      ]
+    }
+  ]
+}
+{% endschema %}

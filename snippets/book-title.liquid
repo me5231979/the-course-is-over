@@ -1,0 +1,27 @@
+{%- comment -%}
+  Sets the book title the way the cover does:
+  small words ("The", "is", ...) in Playfair italic, the rest in Montserrat
+  Heavy Italic caps, and the last word in orange.
+  "The Course Is Over" renders as:  The / COURSE / is OVER
+
+  Params:
+    variant: 'stack' (hero, three lines) or 'inline' (header, footer). Default 'stack'.
+{%- endcomment -%}
+{%- liquid
+  assign v = variant | default: 'stack'
+  assign small_words = 'the,a,an,is,of,and,or,to,in,on,at,for,by' | split: ','
+  assign words = settings.book_title | split: ' '
+  assign last_index = words.size | minus: 1
+-%}
+<span class="title title--{{ v }}">
+  {%- for word in words -%}
+    {%- assign lower = word | downcase -%}
+    {%- if small_words contains lower and forloop.last == false -%}
+      <span class="title__small">{% if forloop.first %}{{ lower | capitalize }}{% else %}{{ lower }}{% endif %}</span>
+      {%- if forloop.first and v == 'stack' -%}<br>{%- else -%}{{ ' ' }}{%- endif -%}
+    {%- else -%}
+      <span class="title__big{% if forloop.last %} title__big--accent{% endif %}">{{ word | upcase }}</span>
+      {%- unless forloop.last -%}{%- if v == 'stack' -%}<br>{%- else -%}{{ ' ' }}{%- endif -%}{%- endunless -%}
+    {%- endif -%}
+  {%- endfor -%}
+</span>

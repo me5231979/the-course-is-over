@@ -12,6 +12,60 @@
     });
   }
 
+  // Training wheels: the coach fades stage by stage as the section scrolls by.
+  // With reduced motion (or no JS) every stage simply shows at once.
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('[data-wheels]').forEach(function (section) {
+    var stages = section.querySelectorAll('[data-stage]');
+    var count = stages.length;
+    if (!count || reduceMotion) return;
+    section.classList.add('is-animated');
+    var meter = section.querySelector('[data-meter]');
+    var frame = section.querySelector('[data-frame]');
+    var back = section.querySelector('[data-wheel="back"]');
+    var front = section.querySelector('[data-wheel="front"]');
+    var mobile = window.matchMedia('(max-width: 899px)');
+    var current = -1;
+    var ticking = false;
+
+    function setStage(n) {
+      stages.forEach(function (li, i) { li.classList.toggle('is-active', i === n); });
+      var progress = count > 1 ? n / (count - 1) : 1;
+      if (meter) meter.style.transform = 'scaleX(' + (1 - progress) + ')';
+      var off = n === count - 1 && count > 1;
+      var loose = !off && progress >= 0.5;
+      if (back) {
+        back.style.transform = off ? 'translate(-160px, 40px) rotate(-220deg)' : loose ? 'translate(-6px, 4px) rotate(-12deg)' : '';
+        back.style.opacity = off ? '0' : '1';
+      }
+      if (front) {
+        front.style.transform = off ? 'translate(220px, 40px) rotate(260deg)' : loose ? 'translate(6px, 4px) rotate(12deg)' : '';
+        front.style.opacity = off ? '0' : '1';
+      }
+      if (frame) frame.style.transform = off ? 'translateX(18px)' : '';
+    }
+
+    function update() {
+      ticking = false;
+      var r = section.getBoundingClientRect();
+      var vh = window.innerHeight;
+      var p;
+      if (mobile.matches) {
+        p = 1 - (r.bottom - vh * 0.35) / (r.height + vh * 0.1);
+      } else {
+        p = -r.top / Math.max(1, r.height - vh);
+      }
+      var n = Math.max(0, Math.min(count - 1, Math.floor(Math.max(0, Math.min(0.999, p)) * count)));
+      if (n !== current) { current = n; setStage(n); }
+    }
+
+    setStage(0);
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  });
+
   var root = (window.Shopify && window.Shopify.routes && window.Shopify.routes.root) || '/';
 
   function updateCount(count) {

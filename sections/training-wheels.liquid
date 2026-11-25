@@ -1,0 +1,91 @@
+{%- comment -%}
+  Scroll story: the coach steps back stage by stage and the training wheels
+  come off. Each block is one stage. Without JavaScript or with reduced
+  motion, every stage shows at once.
+{%- endcomment -%}
+<section class="wheels" id="{{ section.settings.anchor | default: section.id }}" data-wheels style="--stages: {{ section.blocks.size | at_least: 1 }}">
+  <div class="wheels__sticky">
+    <div class="wrap wheels__grid">
+      <div class="wheels__text">
+        {%- if section.settings.label != blank -%}<p class="label label--ember">{{ section.settings.label }}</p>{%- endif -%}
+        <h2 class="h2">{{ section.settings.heading }}</h2>
+        <ol class="stages" aria-label="{{ section.settings.stages_label | escape }}">
+          {%- for block in section.blocks -%}
+            <li class="stages__item" data-stage="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              <b>{{ block.settings.title }}</b> {{ block.settings.body }}
+            </li>
+          {%- endfor -%}
+        </ol>
+      </div>
+      <div class="wheels__art" aria-hidden="true">
+        <svg viewBox="0 0 520 360" class="bike" focusable="false">
+          <line class="bike__ground" x1="10" y1="318" x2="510" y2="318"/>
+          <g class="bike__frame" data-frame>
+            <circle class="bike__tire" cx="130" cy="250" r="66"/>
+            <circle class="bike__tire" cx="390" cy="250" r="66"/>
+            <circle class="bike__hub" cx="130" cy="250" r="6"/>
+            <circle class="bike__hub" cx="390" cy="250" r="6"/>
+            <path class="bike__tube" d="M130 250 L215 150 L345 150 L390 250 M215 150 L250 250 L345 150 M250 250 L130 250"/>
+            <path class="bike__tube" d="M345 150 L335 118 M315 112 L360 112 M215 150 L205 126 M188 122 L226 122"/>
+            <circle class="bike__hub" cx="250" cy="250" r="10"/>
+          </g>
+          <g class="tw" data-wheel="back">
+            <path class="tw__arm" d="M130 250 L120 292"/>
+            <circle class="tw__tire" cx="116" cy="300" r="18"/>
+            <circle class="tw__hub" cx="116" cy="300" r="6"/>
+          </g>
+          <g class="tw" data-wheel="front">
+            <path class="tw__arm" d="M130 250 L150 292"/>
+            <circle class="tw__tire" cx="156" cy="300" r="18"/>
+            <circle class="tw__hub" cx="156" cy="300" r="6"/>
+          </g>
+        </svg>
+        <div class="meter">
+          <span>{{ section.settings.meter_label }}</span>
+          <span class="meter__bar"><i data-meter></i></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Training wheels",
+  "class": "section-wheels",
+  "settings": [
+    { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "wheels" },
+    { "type": "text", "id": "label", "label": "Label", "default": "Training wheels" },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You're on the bike from the first minute. <em>The wheels come off as you get better.</em>"
+    },
+    { "type": "text", "id": "stages_label", "label": "Stages label (screen readers)", "default": "How the coach fades" },
+    { "type": "text", "id": "meter_label", "label": "Meter label", "default": "Coach support" }
+  ],
+  "blocks": [
+    {
+      "type": "stage",
+      "name": "Stage",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Leads." },
+        { "type": "text", "id": "body", "label": "Text", "default": "Shows each step and why it matters." }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Training wheels",
+      "blocks": [
+        { "type": "stage", "settings": { "title": "Leads.", "body": "Shows each step and why it matters." } },
+        { "type": "stage", "settings": { "title": "Guides.", "body": "Asks what you'd do next, then confirms." } },
+        { "type": "stage", "settings": { "title": "Watches.", "body": "Steps in only when you stall or slip." } },
+        { "type": "stage", "settings": { "title": "Lets go.", "body": "You do it alone, and it checks that you can." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
