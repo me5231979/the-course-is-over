@@ -4,10 +4,7 @@
       {%- if section.settings.photo != blank -%}
         {{ section.settings.photo | image_url: width: 900 | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 990px) 420px, 90vw', alt: settings.book_author }}
       {%- else -%}
-        <div class="author__placeholder" aria-hidden="true">
-          {%- assign parts = settings.book_author | split: ' ' -%}
-          {%- for part in parts -%}{{ part | slice: 0 }}{%- endfor -%}
-        </div>
+        <img src="{{ 'author-photo.jpg' | asset_url }}" width="960" height="1200" loading="lazy" alt="Portrait of {{ settings.book_author | escape }}">
       {%- endif -%}
     </div>
     <div class="author__copy">
@@ -26,7 +23,7 @@
   "name": "About the author",
   "settings": [
     { "type": "text", "id": "anchor", "label": "Anchor ID", "default": "author" },
-    { "type": "image_picker", "id": "photo", "label": "Photo" },
+    { "type": "image_picker", "id": "photo", "label": "Photo", "info": "Leave empty to use the headshot bundled with the theme." },
     { "type": "text", "id": "label", "label": "Label", "default": "About the author" },
     {
       "type": "richtext",
