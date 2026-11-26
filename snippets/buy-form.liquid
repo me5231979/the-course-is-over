@@ -24,9 +24,10 @@
               {% if variant.id == current.id %}checked{% endif %}
             >
             <span class="format__name">{{ variant.title }}</span>
-            <span class="format__price">
-              {%- if variant.available -%}{{ variant.price | money }}{%- else -%}{{ settings.release_label }}{%- endif -%}
-            </span>
+            <span class="format__price">{{ variant.price | money }}</span>
+            {%- unless variant.available -%}
+              <span class="format__status">{{ settings.release_label }}</span>
+            {%- endunless -%}
           </label>
         {%- endfor -%}
       </div>

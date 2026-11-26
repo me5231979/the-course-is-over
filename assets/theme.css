@@ -286,7 +286,8 @@ input:focus, textarea:focus, select:focus { border-color: var(--text); outline: 
 .format__name { font: 800 17px var(--font-display); }
 .format__price { font: italic 900 22px/1.2 var(--font-display); letter-spacing: -.01em; color: var(--muted); }
 .format.is-unavailable .format__name { color: var(--muted); }
-.format.is-unavailable .format__price { font: 700 12px/1.4 var(--font-display); letter-spacing: .14em; text-transform: uppercase; }
+.format.is-unavailable .format__price { color: var(--muted); }
+.format__status { font: 700 11px/1.4 var(--font-display); letter-spacing: .14em; text-transform: uppercase; color: var(--accent-text); }
 .buy__row { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; }
 .buy__row > .btn { flex: 1 1 220px; }
 .buy__row .shopify-payment-button { flex: 1 1 220px; }
