@@ -127,15 +127,16 @@ input:focus, textarea:focus, select:focus { border-color: var(--text); outline: 
 }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; overflow: hidden; padding: clamp(2.5rem, 6vw, 5.5rem) 0 clamp(4rem, 8vw, 7rem); }
+.hero { position: relative; overflow: hidden; padding: clamp(2rem, 4.5vw, 4rem) 0 clamp(4rem, 8vw, 7rem); }
 .hero::after { content: ""; position: absolute; inset: auto 0 0 0; height: 45%; background: radial-gradient(60% 70% at 72% 100%, color-mix(in srgb, var(--text) 7%, transparent), transparent 70%); pointer-events: none; }
 .hero__inner { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
-.hero__title { font-size: clamp(64px, 9.4vw, 146px); margin: .25rem 0 1.6rem; color: var(--text); }
+.hero__title { font-size: clamp(60px, min(8vw, 15vh), 124px); margin: .25rem 0 1.4rem; color: var(--text); }
 .hero__subtitle {
   display: flex; align-items: center; gap: 14px;
   font: 600 clamp(13px, 1.05vw, 15px)/1.6 var(--font-display);
   letter-spacing: .22em; text-transform: uppercase;
   margin: 0 0 1.4rem; color: var(--text);
+  text-wrap: balance; max-width: 34em;
 }
 .hero__subtitle::before { content: ""; width: 34px; height: 3px; background: var(--accent); flex: none; }
 .hero__lede { font-size: clamp(19px, 1.45vw, 22px); color: var(--muted); max-width: 40ch; }
