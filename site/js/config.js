@@ -49,7 +49,7 @@ window.COURSE_CONFIG = {
     {
       key: "paperback",
       name: "Paperback",
-      price: "$19",
+      price: "$19.99",
       note: "Lighter to carry to the next offsite.",
       productId: "",
       fallbackUrl: "",

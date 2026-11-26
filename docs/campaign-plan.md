@@ -3,7 +3,9 @@
 *A bet on AI, training, and how people learn at work* · Matthew Estes
 Working draft · November 2026 · Built from manuscript draft 32
 
-> **Assumptions to confirm** (marked ⚠ below): launch date, formats and prices, ad budget, and whether early-reader praise exists yet. Everything else comes from the manuscript.
+> **Assumptions to confirm** (marked ⚠ below): launch date, ad budget, and whether early-reader praise exists yet. Everything else comes from the manuscript.
+>
+> **Pricing (set November 25, 2026):** hardcover $28.00, paperback $19.99, signed hardcover $35.00. Based on the comps in `docs/book-price-comps.xlsx` (AI and learning trade hardcover median $30, paperback median $19). Sell the hardcover mainly direct; use the paperback for bookstores and Amazon, where print-on-demand hardcover margins are thin.
 
 ---
 
@@ -139,7 +141,7 @@ No budget yet, so the shares in §4 are a starter split: about 65% paid distribu
 
 ## 10. Next steps
 
-1. ⚠ Confirm **launch date, formats and prices**, and the **ad budget**.
+1. ⚠ Confirm **launch date** and the **ad budget**. Prices are set (see top). Confirm Lulu print costs once the page count is final.
 2. **Reconnect Shopify** (`/mcp` → shopify), create the products and a Storefront API token, then paste the IDs into `site/js/config.js`.
 3. Choose an **email platform** (Shopify Email, Mailchimp, Kit) and connect the signup form.
 4. Export the Introduction as the free-chapter PDF; supply a headshot.
